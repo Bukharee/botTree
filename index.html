@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyAIFactChecker</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
+</head>
+
+<body>
+  <h1>Welcome to MyAIFactChecker</h1>
+  <div id="output">
+    <!-- <p>Please choose one of the options by entering the corresponding number:</p>
+    <input type="text" id="userInput" placeholder="Enter your choice">
+    <button onclick="getResponse()">Submit</button> -->
+  </div>
+
+  <script>
+    function mainMenu() {
+      return "Please choose one of the options by entering the corresponding number:<br>1. ✅ Fact-Check Information<br>2. How to Use<br>3. About MyAIFactChecker<br>4. ✉️ Contact Us<br>5. Choose Language.";
+    }
+
+    function factCheckMenu() {
+      return "Choose the type of news for fact-checking:<br>1. Sport<br>2. Politics<br>3. International<br>4. Main Menu";
+    }
+
+    function factCheckSport() {
+      return "You've selected Sport. Let me fact-check the latest sports news for you.";
+    }
+
+    // Add other functions as needed...
+
+    function getResponse() {
+      console.log("currentNode:", currentNode);
+      const userInput = document.getElementById('userInput').value.trim().toLowerCase();
+      console.log(userInput);
+      const space = document.getElementById("output")
+      document.getElementById("userInput").remove()
+      document.getElementById("sb").remove()
+
+      let correctNode = currentNode.children[userInput - 1]
+      console.log("correct: ", currentNode.children[userInput - 1].value())
+      document.getElementById('output').innerHTML += correctNode.value() + '<br><input type="text" id="userInput" placeholder="Enter your choice"><button onclick="getResponse()" id="sb">Submit</button>';
+      currentNode = correctNode
+    }
+
+
+    let currentNode = 0;
+    let child = 0;
+
+    class TreeNode {
+      constructor(value, children = []) {
+        this.value = value;
+        this.children = children;
+      }
+
+      addChild(childValue) {
+        const newChild = new TreeNode(childValue);
+        this.children.push(newChild);
+        return newChild;
+      }
+    }
+
+    const rootNode =
+      new TreeNode(mainMenu, [
+        new TreeNode(factCheckMenu, [new TreeNode(factCheckSport), new TreeNode(3)]),
+        new TreeNode(3, [
+          new TreeNode(6),
+          new TreeNode(7)
+        ])
+      ]);
+    // Initial display of main menu
+    document.getElementById('output').innerHTML += rootNode.value() + '<br><input type="text" id="userInput" placeholder="Enter your choice"><button onclick="getResponse()"  id="sb">Submit</button>';
+    currentNode = rootNode
+  </script>
+</body>
+
+</html>
