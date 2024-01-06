@@ -47,7 +47,11 @@
       currentNode = correctNode
     }
 
+    function backTomainMenu() {
+      console.log(rootNode.value(), "rootnode")
+      document.getElementById('output').innerHTML = '' + rootNode.value();
 
+    }
     let currentNode = 0;
     let child = 0;
 
@@ -66,7 +70,7 @@
 
     const rootNode =
       new TreeNode(mainMenu, [
-        new TreeNode(factCheckMenu, [new TreeNode(factCheckSport), new TreeNode(3)]),
+        new TreeNode(factCheckMenu, [new TreeNode(factCheckSport), new TreeNode(3), new TreeNode(3), new TreeNode(backTomainMenu)]),
         new TreeNode(3, [
           new TreeNode(6),
           new TreeNode(7)
